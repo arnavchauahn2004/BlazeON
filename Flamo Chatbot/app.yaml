@@ -1,0 +1,19 @@
+runtime: python310
+
+entrypoint: gunicorn -b :$PORT Flamo_api:app
+
+env_variables:
+  GEMINI_API_KEY: "AIzaSyBwkZxUsdQX_sfUpfaJbMsKt2P9i4uhL14"
+
+instance_class: F2
+
+# Optional: scaling options for your app (e.g., automatic scaling)
+automatic_scaling:
+  min_instances: 1
+  max_instances: 10
+
+handlers:
+  - url: /chat
+    script: auto
+  - url: /.*  
+    static_dir: static

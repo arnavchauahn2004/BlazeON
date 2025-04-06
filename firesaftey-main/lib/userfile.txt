@@ -1,0 +1,284 @@
+Document ID: wShLBLSkVk0shujiGg5B
+
+Basic Information:
+Full Name: Pragyan Diwakar
+Gender: Male
+Age: 26
+
+Chat History:
+ch1:
+receive: Hello, I am your personal AI chat bot to help your queries.
+send: Hii.
+time: March 27, 2025 at 12:52:31 AM UTC+5:30
+
+Common Drills:
+CD_Ch1:
+Status: Completed
+Score: 25
+
+Contacts:
+Email: abc@gmail.com
+Phone: 7894561230
+
+Drills Information:
+Modules Completed: 5
+Emergency Role: Crowd Guide
+Last Drill: March 26, 2025 at 12:00:00 AM UTC+5:30
+Fire Safety Level: Beginner
+
+Field Drills:
+FD_ch1:
+Status: Ongoing
+Score: 0
+
+Hotel Information:
+Hotel: Trident
+Location: Bhubaneswar, Odisha
+
+Job Information:
+Manager Name: Mr. Manoj Tyagi
+Position: Security
+Joining: March 3, 2020 at 12:00:00 AM UTC+5:30
+Shift: Night
+
+Notifications:
+no1:
+- March 27, 2025 at 12:47:41 AM UTC+5:30
+- Welcome to BlazeOn
+
+Tutorials:
+Ch1:
+Status: Completed
+Score: 20
+
+Is Filled: true
+
+role: Manager
+
+===========================================================================
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class UserDocument {
+   String documentId;
+  final String? fullName;
+  final String? gender;
+  final int? age;
+  final Map<String, dynamic>? chatHistory;
+  final Map<String, dynamic>? commonDrills;
+  final String? email;
+  final int? phone;
+  final String? emergencyRole;
+  final String? fireSafetyLevel;
+  final DateTime? lastDrill;
+  final String? modulesCompleted;
+  final Map<String, dynamic>? fieldDrills;
+  final String? hotel;
+  final String? location;
+  final String? managerName;
+  final String? position;
+  final DateTime? joining;
+  final String? shift;
+  final List<dynamic>? notification;
+  final Map<String, dynamic>? tutorials;
+  final bool? isFilled;
+
+  UserDocument({
+    required this.documentId,
+    this.fullName,
+    this.gender,
+    this.age,
+    this.chatHistory,
+    this.commonDrills,
+    this.email,
+    this.phone,
+    this.emergencyRole,
+    this.fireSafetyLevel,
+    this.lastDrill,
+    this.modulesCompleted,
+    this.fieldDrills,
+    this.hotel,
+    this.location,
+    this.managerName,
+    this.position,
+    this.joining,
+    this.shift,
+    this.notification,
+    this.tutorials,
+    this.isFilled,
+  });
+
+  static Future<UserDocument?> fromFirestore(String documentId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snapshot =
+          await FirebaseFirestore.instance.collection('users').doc(documentId).get();
+
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+
+        return UserDocument(
+          documentId: documentId,
+          fullName: data['Basic_Info']?['FullName'] as String?,
+          gender: data['Basic_Info']?['Gender'] as String?,
+          age: (data['Basic_Info']?['Age'] as num?)?.toInt(),
+          chatHistory: data['Chat_History'] as Map<String, dynamic>?,
+          commonDrills: data['Common_Drills'] as Map<String, dynamic>?,
+          email: data['Contacts']?['Email'] as String?,
+          phone: (data['Contacts']?['Phone'] as num?)?.toInt(),
+          emergencyRole: data['Drills_Info']?['EmergencyRole'] as String?,
+          fireSafetyLevel: data['Drills_Info']?['FireSafteyLevel'] as String?,
+          lastDrill: (data['Drills_Info']?['LastDrill'] as Timestamp?)?.toDate(),
+          modulesCompleted: data['Drills_Info']?['ModulesCompleted'] as String?,
+          fieldDrills: data['Field_Drills'] as Map<String, dynamic>?,
+          hotel: data['Hotel_Info']?['Hotel'] as String?,
+          location: data['Hotel_Info']?['Location'] as String?,
+          managerName: data['Job_Info']?['ManagerName'] as String?,
+          position: data['Job_Info']?['Position'] as String?,
+          joining: (data['Job_Info']?['Joinng'] as Timestamp?)?.toDate(),
+          shift: data['Job_Info']?['Shift'] as String?,
+          notification: data['Notification']?['no1'] as List<dynamic>?,
+          tutorials: data['Tutorials'] as Map<String, dynamic>?,
+          isFilled: data['isFilled'] as bool?,
+        );
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching user document: $e');
+      return null;
+    }
+    finally
+    {
+      
+    }
+  }
+}
+====================================================
+
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class UserDocument {
+  String documentId;
+  final String? fullName;
+  final String? gender;
+  final int? age;
+  final Map<String, dynamic>? chatHistory;
+  final Map<String, dynamic>? commonDrills;
+  final String? email;
+  final int? phone;
+  final String? emergencyRole;
+  final String? fireSafetyLevel;
+  final DateTime? lastDrill;
+  final String? modulesCompleted;
+  final Map<String, dynamic>? fieldDrills;
+  final String? hotel;
+  final String? location;
+  final String? managerName;
+  final String? position;
+  final DateTime? joining;
+  final String? shift;
+  final List<dynamic>? notification;
+  final Map<String, dynamic>? tutorials;
+  final bool? isFilled;
+
+  UserDocument({
+    required this.documentId,
+    this.fullName,
+    this.gender,
+    this.age,
+    this.chatHistory,
+    this.commonDrills,
+    this.email,
+    this.phone,
+    this.emergencyRole,
+    this.fireSafetyLevel,
+    this.lastDrill,
+    this.modulesCompleted,
+    this.fieldDrills,
+    this.hotel,
+    this.location,
+    this.managerName,
+    this.position,
+    this.joining,
+    this.shift,
+    this.notification,
+    this.tutorials,
+    this.isFilled,
+  });
+
+  static Future<UserDocument?> fromFirestore(String documentId) async {
+    DocumentSnapshot<Map<String, dynamic>>? snapshot;
+
+    try {
+      snapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(documentId)
+          .get();
+
+      if (snapshot.exists) {
+        Map<String, dynamic> data = snapshot.data()!;
+
+        return UserDocument(
+          documentId: documentId,
+          fullName: data['Basic_Info']?['FullName'] as String?,
+          gender: data['Basic_Info']?['Gender'] as String?,
+          age: (data['Basic_Info']?['Age'] as num?)?.toInt(),
+          chatHistory: data['Chat_History'] as Map<String, dynamic>?,
+          commonDrills: data['Common_Drills'] as Map<String, dynamic>?,
+          email: data['Contacts']?['Email'] as String?,
+          phone: (data['Contacts']?['Phone'] as num?)?.toInt(),
+          emergencyRole: data['Drills_Info']?['EmergencyRole'] as String?,
+          fireSafetyLevel: data['Drills_Info']?['FireSafteyLevel'] as String?,
+          lastDrill: (data['Drills_Info']?['LastDrill'] as Timestamp?)?.toDate(),
+          modulesCompleted: data['Drills_Info']?['ModulesCompleted'] as String?,
+          fieldDrills: data['Field_Drills'] as Map<String, dynamic>?,
+          hotel: data['Hotel_Info']?['Hotel'] as String?,
+          location: data['Hotel_Info']?['Location'] as String?,
+          managerName: data['Job_Info']?['ManagerName'] as String?,
+          position: data['Job_Info']?['Position'] as String?,
+          joining: (data['Job_Info']?['Joinng'] as Timestamp?)?.toDate(),
+          shift: data['Job_Info']?['Shift'] as String?,
+          notification: data['Notification']?['no1'] as List<dynamic>?,
+          tutorials: data['Tutorials'] as Map<String, dynamic>?,
+          isFilled: data['isFilled'] as bool?,
+        );
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching user document: $e');
+      return null;
+    } finally {
+      if (snapshot != null && snapshot.exists) {
+        final data = snapshot.data()!;
+        print('📄 User Document Data:');
+        print('Full Name: ${data['Basic_Info']?['FullName']}');
+        print('Gender: ${data['Basic_Info']?['Gender']}');
+        print('Age: ${data['Basic_Info']?['Age']}');
+        print('Email: ${data['Contacts']?['Email']}');
+        print('Phone: ${data['Contacts']?['Phone']}');
+        print('Hotel: ${data['Hotel_Info']?['Hotel']}');
+        print('Location: ${data['Hotel_Info']?['Location']}');
+        print('Position: ${data['Job_Info']?['Position']}');
+        print('Manager Name: ${data['Job_Info']?['ManagerName']}');
+        print('Joining: ${data['Job_Info']?['Joinng']}');
+        print('Shift: ${data['Job_Info']?['Shift']}');
+        print('Emergency Role: ${data['Drills_Info']?['EmergencyRole']}');
+        print('Fire Safety Level: ${data['Drills_Info']?['FireSafteyLevel']}');
+        print('Last Drill: ${data['Drills_Info']?['LastDrill']}');
+        print('Modules Completed: ${data['Drills_Info']?['ModulesCompleted']}');
+        print('Chat History: ${data['Chat_History']}');
+        print('Common Drills: ${data['Common_Drills']}');
+        print('Field Drills: ${data['Field_Drills']}');
+        print('Tutorials: ${data['Tutorials']}');
+        print('Notifications: ${data['Notification']?['no1']}');
+        print('Is Filled: ${data['isFilled']}');
+      } else {
+        print('⚠️ No user document found for "$documentId"');
+      }
+    }
+  }
+}
+
+===============================================================

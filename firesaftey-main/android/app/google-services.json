@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "770700444793",
+    "project_id": "blazeon-eb4ec",
+    "storage_bucket": "blazeon-eb4ec.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770700444793:android:97a4ad84c1eb16935940a8",
+        "android_client_info": {
+          "package_name": "com.example.firesaftey"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE6UpKILLoLnmJin8TxESPG3yi8ZeLMMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
